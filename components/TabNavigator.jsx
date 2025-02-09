@@ -4,7 +4,6 @@ import { Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import BookDetailsNavigator from "./BookDetailsNavigator.jsx";
 
 // Pantallas
 import HomeScreen from "../views/home.jsx";
@@ -19,15 +18,15 @@ export function TabNavigator() {
       {Platform.OS !== "web" ? (
         <Tab.Navigator
           screenOptions={{
+            headerShown: false,
             tabBarActiveTintColor: "blue",
             tabBarInactiveTintColor: "gray",
           }}
         >
           <Tab.Screen
-            name="Main"
-            component={BookDetailsNavigator}
+            name="Inicio"
+            component={HomeScreen}
             options={{
-              headerShown: false,
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons name="home" size={size} color={color} />
               ),

@@ -7,19 +7,35 @@ import {
   Pressable,
 } from "react-native";
 
-import { data } from "../data/books.jsx";
+import { createStackNavigator } from "@react-navigation/stack";
+import data from "../data/books.json";
+import DetailsScreen from "./details";
 
-export default function HomeScreen({ navigation }) {
+const Stack = createStackNavigator();
+
+export default function BookDetailsNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Inicio" component={HomeScreen} />
+      <Stack.Screen name="Detalles" component={DetailsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function HomeScreen({ navigation }) {
+  const bookDetails = (book) => {
+    navigation.navigate("Detalles", { book });
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.titleStyle}>Novedades</Text>
       <FlatList
         contentContainerStyle={styles.list}
         data={data}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Pressable
-            onPress={() => navigation.navigate("Detalles", { book: item })}
-          >
+          <Pressable onPress={() => bookDetails(item)}>
             <Image style={styles.books} source={{ uri: item.imgUrl }} />
           </Pressable>
         )}
@@ -31,9 +47,7 @@ export default function HomeScreen({ navigation }) {
         contentContainerStyle={styles.list}
         data={data}
         renderItem={({ item }) => (
-          <Pressable
-            onPress={() => navigation.navigate("Detalles", { book: item })}
-          >
+          <Pressable onPress={() => bookDetails(item)}>
             <Image style={styles.books} source={{ uri: item.imgUrl }} />
           </Pressable>
         )}
@@ -45,9 +59,7 @@ export default function HomeScreen({ navigation }) {
         contentContainerStyle={styles.list}
         data={data}
         renderItem={({ item }) => (
-          <Pressable
-            onPress={() => navigation.navigate("Detalles", { book: item })}
-          >
+          <Pressable onPress={() => bookDetails(item)}>
             <Image style={styles.books} source={{ uri: item.imgUrl }} />
           </Pressable>
         )}
@@ -59,9 +71,7 @@ export default function HomeScreen({ navigation }) {
         contentContainerStyle={styles.list}
         data={data}
         renderItem={({ item }) => (
-          <Pressable
-            onPress={() => navigation.navigate("Detalles", { book: item })}
-          >
+          <Pressable onPress={() => bookDetails(item)}>
             <Image style={styles.books} source={{ uri: item.imgUrl }} />
           </Pressable>
         )}
@@ -73,9 +83,7 @@ export default function HomeScreen({ navigation }) {
         contentContainerStyle={styles.list}
         data={data}
         renderItem={({ item }) => (
-          <Pressable
-            onPress={() => navigation.navigate("Detalles", { book: item })}
-          >
+          <Pressable onPress={() => bookDetails(item)}>
             <Image style={styles.books} source={{ uri: item.imgUrl }} />
           </Pressable>
         )}
