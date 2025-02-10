@@ -17,13 +17,13 @@ const Stack = createStackNavigator();
 export default function SearchStackNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Buscar" component={SearchScreen} />
+      <Stack.Screen name="Buscar" component={SearchView} />
       <Stack.Screen name="Detalles" component={DetailsScreen} />
     </Stack.Navigator>
   );
 }
 
-function SearchScreen({ navigation }) {
+function SearchView({ navigation }) {
   const [searchText, setSearchText] = useState("");
   const [filteredBooks, setFilteredBooks] = useState(books);
 

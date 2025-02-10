@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
-export default function SettingsScreen() {
+export default function SettingsView() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text>Settings</Text>

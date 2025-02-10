@@ -24,7 +24,7 @@ export function TabNavigator() {
           }}
         >
           <Tab.Screen
-            name="Inicio"
+            name="Home"
             component={HomeScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
@@ -33,7 +33,7 @@ export function TabNavigator() {
             }}
           />
           <Tab.Screen
-            name="Buscar"
+            name="Search"
             component={SearchScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
@@ -42,7 +42,7 @@ export function TabNavigator() {
             }}
           />
           <Tab.Screen
-            name="Configuración"
+            name="Settings"
             component={SettingsScreen}
             options={{
               tabBarIcon: ({ color, size }) => (

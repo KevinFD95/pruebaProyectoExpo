@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { Text, StyleSheet, ScrollView, Image, View } from "react-native";
 
-export default function DetailsScreen({ route, navigation }) {
+export default function DetailsView({ route, navigation }) {
   const { book } = route.params;
 
   useLayoutEffect(() => {

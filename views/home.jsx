@@ -13,16 +13,16 @@ import DetailsScreen from "./details";
 
 const Stack = createStackNavigator();
 
-export default function BookDetailsNavigator() {
+export default function HomeStackNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Inicio" component={HomeScreen} />
+      <Stack.Screen name="Inicio" component={HomeView} />
       <Stack.Screen name="Detalles" component={DetailsScreen} />
     </Stack.Navigator>
   );
 }
 
-function HomeScreen({ navigation }) {
+function HomeView({ navigation }) {
   const bookDetails = (book) => {
     navigation.navigate("Detalles", { book });
   };
