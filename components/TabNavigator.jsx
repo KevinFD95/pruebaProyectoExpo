@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 
 export function TabNavigator() {
   return (
-    <NavigationContainer>
+    <>
       {Platform.OS !== "web" ? (
         <Tab.Navigator
           screenOptions={{
@@ -54,6 +54,6 @@ export function TabNavigator() {
       ) : (
         <HomeScreen />
       )}
-    </NavigationContainer>
+  </>
   );
 }

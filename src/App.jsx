@@ -4,13 +4,17 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // Navegador
 import { TabNavigator } from "../components/TabNavigator.jsx";
+import LoginScreen from "../views/login.jsx";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
         <StatusBar style="auto" />
-        <TabNavigator />
+        <NavigationContainer>
+          <LoginScreen />
+        </NavigationContainer>
       </View>
     </SafeAreaProvider>
   );
