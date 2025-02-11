@@ -58,15 +58,15 @@ function LoginView() {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
-  useEffect(() => {
-    async function checkLogin() {
-      const storedUser = await AsyncStorage.getItem("loggedInUser");
-      if (storedUser) {
-        navigation.replace("HomeView");
-      }
-    }
-    checkLogin();
-  }, []);
+  // useEffect(() => {
+  //   async function checkLogin() {
+  //     const storedUser = await AsyncStorage.getItem("loggedInUser");
+  //     if (storedUser) {
+  //       navigation.replace("HomeView");
+  //     }
+  //   }
+  //   checkLogin();
+  // }, []);
 
   const handleLogin = async () => {
     const user = users.find(
