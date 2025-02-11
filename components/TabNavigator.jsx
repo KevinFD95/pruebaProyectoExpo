@@ -2,7 +2,6 @@ import { Platform } from "react-native";
 
 // Navegador
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 // Pantallas
@@ -54,6 +53,6 @@ export function TabNavigator() {
       ) : (
         <HomeScreen />
       )}
-  </>
+    </>
   );
 }

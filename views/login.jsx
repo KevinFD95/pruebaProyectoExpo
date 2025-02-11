@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import {
   View,
   Text,
@@ -7,15 +8,43 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { ActivityIndicator } from "react-native";
 
+// Navegación
+import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 import { TabNavigator } from "../components/TabNavigator.jsx";
+
+// Auth
 import users from "../data/users.json";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
 export default function LoginStackNavigator() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const storedUser = await AsyncStorage.getItem("loggedInUser");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+      setIsLoading(false);
+    };
+    checkUser();
+  }, [navigation]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#6200EE" />
+      </View>
+    );
+  }
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginView} />
@@ -29,12 +58,23 @@ function LoginView() {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
-  const handleLogin = () => {
+  useEffect(() => {
+    async function checkLogin() {
+      const storedUser = await AsyncStorage.getItem("loggedInUser");
+      if (storedUser) {
+        navigation.replace("HomeView");
+      }
+    }
+    checkLogin();
+  }, []);
+
+  const handleLogin = async () => {
     const user = users.find(
       (u) => u.email === email && u.password === password
     );
 
     if (user) {
+      await AsyncStorage.setItem("loggedInUser", JSON.stringify(user));
       Alert.alert("Éxito", "Has iniciado sesión correctamente");
       navigation.replace("HomeView");
     } else {

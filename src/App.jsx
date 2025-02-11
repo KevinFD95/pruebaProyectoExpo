@@ -2,21 +2,25 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+// Auth
+import { AuthProvider } from "../auth/AuthContext.jsx";
+
 // Navegador
-import { TabNavigator } from "../components/TabNavigator.jsx";
 import LoginScreen from "../views/login.jsx";
 import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        <NavigationContainer>
-          <LoginScreen />
-        </NavigationContainer>
-      </View>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <View style={styles.container}>
+          <StatusBar style="auto" />
+          <NavigationContainer>
+            <LoginScreen />
+          </NavigationContainer>
+        </View>
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 }
 
