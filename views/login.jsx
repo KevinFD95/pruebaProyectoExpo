@@ -21,21 +21,25 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
+const checkUserInStorage = async () => {
+  const storedUser = await AsyncStorage.getItem("loggedInUser");
+  return storedUser ? JSON.parse(storedUser) : null;
+};
+
 export default function LoginStackNavigator() {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const navigation = useNavigation();
 
   useEffect(() => {
-    const checkUser = async () => {
-      const storedUser = await AsyncStorage.getItem("loggedInUser");
+    const fetchUser = async () => {
+      storedUser = await checkUserInStorage();
       if (storedUser) {
-        setUser(JSON.parse(storedUser));
+        setUser(storedUser);
       }
       setIsLoading(false);
     };
-    checkUser();
-  }, [navigation]);
+    fetchUser();
+  }, []);
 
   if (isLoading) {
     return (
@@ -43,14 +47,14 @@ export default function LoginStackNavigator() {
         <ActivityIndicator size="large" color="#6200EE" />
       </View>
     );
+  } else {
+    return (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={LoginView} />
+        <Stack.Screen name="HomeView" component={TabNavigator} />
+      </Stack.Navigator>
+    );
   }
-
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginView} />
-      <Stack.Screen name="HomeView" component={TabNavigator} />
-    </Stack.Navigator>
-  );
 }
 
 function LoginView() {
@@ -58,15 +62,15 @@ function LoginView() {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   async function checkLogin() {
-  //     const storedUser = await AsyncStorage.getItem("loggedInUser");
-  //     if (storedUser) {
-  //       navigation.replace("HomeView");
-  //     }
-  //   }
-  //   checkLogin();
-  // }, []);
+  useEffect(() => {
+    async function checkLogin() {
+      storedUser = await checkUserInStorage();
+      if (storedUser) {
+        navigation.replace("HomeView");
+      }
+    }
+    checkLogin();
+  }, [navigation]);
 
   const handleLogin = async () => {
     const user = users.find(
