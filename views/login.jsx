@@ -58,7 +58,7 @@ export default function LoginStackNavigator() {
 }
 
 function LoginView() {
-  const [email, setEmail] = useState("");
+  const [userInput, setUserInput] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
@@ -74,7 +74,8 @@ function LoginView() {
 
   const handleLogin = async () => {
     const user = users.find(
-      (u) => u.email === email && u.password === password
+      (u) =>
+        ((u.email === userInput || u.username === userInput) && u.password === password)
     );
 
     if (user) {
@@ -92,9 +93,9 @@ function LoginView() {
 
       <TextInput
         style={styles.input}
-        placeholder="Correo electrónico"
-        value={email}
-        onChangeText={setEmail}
+        placeholder="Usuario o Correo electrónico"
+        value={userInput}
+        onChangeText={setUserInput}
         keyboardType="email-address"
         autoCapitalize="none"
       />
