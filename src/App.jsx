@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // Auth
@@ -10,15 +10,14 @@ import LoginScreen from "../views/login.jsx";
 import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
+
   return (
     <AuthProvider>
-      <SafeAreaProvider>
-        <View style={styles.container}>
-          <StatusBar style="auto" />
-          <NavigationContainer>
-            <LoginScreen />
-          </NavigationContainer>
-        </View>
+      <SafeAreaProvider style={styles.container}>
+        <StatusBar style="auto" />
+        <NavigationContainer>
+          <LoginScreen />
+        </NavigationContainer>
       </SafeAreaProvider>
     </AuthProvider>
   );
@@ -27,6 +26,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
 });

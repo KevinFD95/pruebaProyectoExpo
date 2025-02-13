@@ -14,6 +14,7 @@ import DetailsScreen from "./details";
 const Stack = createStackNavigator();
 
 export default function HomeStackNavigator() {
+
   return (
     <Stack.Navigator>
       <Stack.Screen name="Inicio" component={HomeView} />

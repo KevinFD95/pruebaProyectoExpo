@@ -12,6 +12,7 @@ import SearchScreen from "../views/search.jsx";
 const Tab = createBottomTabNavigator();
 
 export function TabNavigator() {
+
   return (
     <>
       {Platform.OS !== "web" ? (
